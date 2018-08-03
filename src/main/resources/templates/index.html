@@ -1,10 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>WebSocket</title>
+
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- 可选的Bootstrap主题文件（一般不使用） -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="index.js"></script>
+
 </head>
-<body>fdfdf
-奋斗奋斗奋斗发
+<body>
+    <div class="container">
+
+    </div>
 </body>
+<script>
+    $(function () {
+        var socket = new WebSocket("ws://localhost:8080/webSocket");
+        // socket打开时
+        socket.onopen = function (ev) {
+            console.log("open")
+        }
+        // socket接收到消息时
+        socket.onmessage = function (ev) {
+            var data = ev.data;
+            console.log(data)
+        }
+        // socket关闭时
+        socket.onclose = function (ev) {
+            console.log("close")
+        }
+        // socket发生错误时
+        socket.onerror = function (ev) {
+            console.log("error")
+        }
+
+        
+    })
+</script>
 </html>

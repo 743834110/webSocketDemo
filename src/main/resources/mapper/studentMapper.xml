@@ -3,9 +3,30 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.StudentMapper">
 
-    <select id="queryStudentById" resultType="Student" parameterType="int">
+    <sql id="fields">
+        id, name, age, address
+    </sql>
+
+    <select id="getStudentById" resultType="Student" parameterType="int">
         select *
         from student
         where id = #{id}
+    </select>
+    <select id="listStudentByPager" resultType="Student" parameterType="Pager">
+        select *
+        from student
+        <trim prefix="where" prefixOverrides="where|and|or">
+            <if test="param != null">
+                <if test="param.id != null">
+                    id = #{param.id}
+                </if>
+                <if test="param.name != null">
+                    name like concat('%', concat(#{param.name}, '%'))
+                </if>
+                <if test="param.address != null">
+                    address like concat('%', concat(#{param.address}, '%'))
+                </if>
+            </if>
+        </trim>
     </select>
 </mapper>

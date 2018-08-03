@@ -1,6 +1,8 @@
 package com.example.demo.bean;
 
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable {
 
     private Integer id;
 
@@ -39,6 +41,16 @@ public class Student {
     }
 
     public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Student() {
+    }
+
+    public Student(Integer id, String name, Integer age, String address) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
         this.address = address;
     }
 
